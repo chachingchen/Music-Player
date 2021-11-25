@@ -73,7 +73,6 @@ function prevSong() {
 	if(songIndex < 0) {
 		songIndex = songs.length -1;
 	}
-	// console.log(songIndex);
 	loadSong(songs[songIndex]);
 	playSong();
 }
@@ -84,7 +83,6 @@ function nextSong() {
 	if (songIndex > songs.length -1) {
 		songIndex = 0;
 	}
-	// console.log(songIndex);
 	loadSong(songs[songIndex]);
 	playSong();
 }
@@ -101,12 +99,10 @@ function updateProgressBar(e) {
   	progress.style.width = `${progressPercent}%`;
   	// calculate displey for duration
   	const durationMinutes = Math.floor(duration / 60);
-  	console.log('minutes: ', durationMinutes);
   	let durationSeconds = Math.floor(duration % 60);
   	if(durationSeconds < 10) {
   		durationSeconds = `0${durationSeconds}`
   	}
-  	console.log('seconds: ', durationSeconds);
   	
   	// Delay switching duration element to avoid NaN
   	if(durationSeconds) {
@@ -114,16 +110,24 @@ function updateProgressBar(e) {
   	}
   	// calculate displey for currentTime
   	const currentMinutes = Math.floor(currentTime / 60);
-  	console.log('minutes: ', currentMinutes);
   	let currentSeconds = Math.floor(currentTime % 60);
   	if(currentSeconds < 10) {
   		currentSeconds = `0${currentSeconds}`
   	}
-  	console.log('seconds: ', currentSeconds);
   	currentTimeEl.textContent = `${currentMinutes}:${currentSeconds}`; 
   }
+}
+
+// set progress bar
+function setProgressBar(e) {
+	const width = this.clientWidth;
+	const clickX = e.offsetX;
+	const {duration} = music;
+	music.currentTime = (clickX / width) * duration;
 }
 // Event Listeners
 prevBtn.addEventListener('click', prevSong);
 nextBtn.addEventListener('click', nextSong);
+music.addEventListener('ended', nextSong);
 music.addEventListener('timeupdate', updateProgressBar);
+progressContainer.addEventListener('click', setProgressBar);
