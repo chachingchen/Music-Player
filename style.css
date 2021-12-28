@@ -83,9 +83,8 @@ h3 {
 /* Controls */
 .player-controls {
   position: relative;
-  top: -15px;
-  left: 120px;
-  width: 200px;
+  top: -20px;
+  left: 100px;
 }
 
 .fas {
@@ -98,6 +97,12 @@ h3 {
 
 .fas:hover {
   filter: brightness(80%);
+}
+
+.random {
+  font-size: 18px;
+  position: inherit;
+  right: 50px;
 }
 
 .main-button {
