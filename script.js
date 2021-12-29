@@ -6,6 +6,7 @@ const progressContainer = document.getElementById('progress-container');
 const progress = document.getElementById('progress'); 
 const currentTimeEl = document.getElementById('current-time');
 const durationEl = document.getElementById('duration');
+const randomBtn = document.getElementById('random');
 const prevBtn = document.getElementById('prev');
 const playBtn = document.getElementById('play');
 const nextBtn = document.getElementById('next');
@@ -64,8 +65,32 @@ function loadSong(song) {
 	image.src = `img/${song.name}.jpg`;
 }
 
+
 // current song
 let songIndex = 0;
+
+// randomly select a song in list
+function randomSong() {
+	let pickASong = getRandom(0, songs.length-1);
+	loadSong(songs[pickASong]);
+	playSong();
+	// if pickASong === currentTrack, pick next song
+// 	let i = 0;
+// 	for(i; i <= songs.length-1; i++) {
+// 		if(title.textContent === songs[i].displayName) return i;
+// }
+// 	let pickASong = getRandom(0, songs.length-1);
+// 	console.log('pickASong: ',getRandom(0, songs.length-1));
+// 	(pickASong === i) ? loadSong(songs[pickASong+1]) : loadSong(songs[pickASong]);
+// 	playSong();
+}
+
+//generate random number
+function getRandom(min, max) {
+	min = Math.ceil(min);
+	max = Math.floor(max);
+	return Math.floor(Math.random() * (max-min +1) + min); //max min are inclusive
+}
 
 // previous song
 function prevSong() {
@@ -126,6 +151,7 @@ function setProgressBar(e) {
 	music.currentTime = (clickX / width) * duration;
 }
 // Event Listeners
+randomBtn.addEventListener('click', randomSong);
 prevBtn.addEventListener('click', prevSong);
 nextBtn.addEventListener('click', nextSong);
 music.addEventListener('ended', nextSong);
