@@ -10,6 +10,7 @@ const randomBtn = document.getElementById('random');
 const prevBtn = document.getElementById('prev');
 const playBtn = document.getElementById('play');
 const nextBtn = document.getElementById('next');
+const volumeBtn = document.getElementById('volumeUp');
 
 // music
 const songs = [
@@ -37,6 +38,7 @@ const songs = [
 
 // Check if Playing
 let isPlaying = false;
+let isVolumeOn = false;
 
 //Play
 function playSong() {
@@ -54,8 +56,25 @@ function pauseSong() {
 	music.pause();
 }
 
+function volumeOn() {
+	isVolumeOn = true;
+	volumeBtn.classList.replace('fa-volume-up', 'fa-volume-mute');
+	volumeBtn.setAttribute('title','Muted');
+	music.volume = 0;
+}
+
+function volumeOff() {
+	isVolumeOn = false;
+	volumeBtn.classList.replace('fa-volume-mute', 'fa-volume-up');
+	volumeBtn.setAttribute('title','VolumeUp');
+	music.volume = 0.6;
+}
+
 //Play or Pause Event Listener
 playBtn.addEventListener('click', () => (isPlaying ? pauseSong() : playSong()));
+
+//Volume on or off
+volumeBtn.addEventListener('click', () => (isVolumeOn ? volumeOff() : volumeOn()));
 
 // Update DOM
 function loadSong(song) {

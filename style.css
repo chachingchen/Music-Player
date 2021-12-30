@@ -113,6 +113,13 @@ h3 {
   top: 3px;
 }
 
+#volumeUp {
+  font-size: 25px;
+  position: absolute;
+  bottom: 0px;
+  left: 220px;
+}
+
 /* Media Query: iPhone (Vertical) */
 @media screen and (max-width: 376px) {
   .player-container {
